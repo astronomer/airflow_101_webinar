@@ -17,8 +17,7 @@ import requests
 def upstream_astronauts():
     @task(outlets=[Dataset("current_astronauts")])
     def get_astronauts(**context):
-        ASTRONAUT_API = f"http://api.open-notify.org/astros.json"
-        r = requests.get(ASTRONAUT_API)
+        r = requests.get("http://api.open-notify.org/astros.json")
         number_of_people_in_space = r.json()["number"]
         list_of_people_in_space = r.json()["people"]
 
