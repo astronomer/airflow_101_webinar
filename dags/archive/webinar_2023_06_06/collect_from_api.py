@@ -11,16 +11,18 @@ from include.minio.minio import LocalFilesystemToMinIOOperator
 import requests
 import os
 
+MY_API = "https://catfact.ninja/fact"
 
 @dag(
     schedule="@daily",
     start_date=datetime(2023, 1, 1),
     catchup=False,
+    tags=["webinar_2023_06_06"],
 )
 def collect_from_api():
     @task
     def extract():
-        r = requests.get(os.environ["MY_API"])
+        r = requests.get(MY_API)
         return r.json()
 
     LocalFilesystemToMinIOOperator(

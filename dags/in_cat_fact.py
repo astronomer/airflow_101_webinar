@@ -9,6 +9,7 @@ import requests
     start_date=datetime(2023, 10, 18),
     schedule="@daily",
     catchup=False,
+    tags=["101_presentation_dag"],
 )
 def in_cat_fact():
     @task

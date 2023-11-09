@@ -9,8 +9,13 @@ from airflow.decorators import dag, task
 from pendulum import datetime
 
 
-@dag(schedule="@daily", start_date=datetime(2023, 6, 1), catchup=False)
-def dynamic_task_toy():
+@dag(
+    schedule="@daily",
+    start_date=datetime(2023, 6, 1),
+    catchup=False,
+    tags=["dynamic_task_mapping", "101_presentation_dag"],
+)
+def good_dogs():
     @task
     def get_dogs():
         return "Avery", "Piglet", "Peanut", "Butter"
@@ -22,4 +27,4 @@ def dynamic_task_toy():
     print_dog_info.partial(adjective="very good").expand(dog=get_dogs())
 
 
-dynamic_task_toy()
+good_dogs()

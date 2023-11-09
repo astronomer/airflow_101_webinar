@@ -18,6 +18,7 @@ from pendulum import datetime
     schedule=None,
     catchup=False,
     params={"branch": Param("path_a", enum=["path_a", "path_b"])},
+    tags=["101_presentation_dag", "params", "branching"]
 )
 def enum_param_toy():
     @task.branch
