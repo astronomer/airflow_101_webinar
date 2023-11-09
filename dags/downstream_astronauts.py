@@ -6,10 +6,11 @@ XCom pushed by the upstream_astronauts DAG.
 """
 
 from airflow import Dataset
-from airflow.decorators import dag
+from airflow.decorators import dag, task
 from airflow.operators.bash import BashOperator
 from airflow.models.baseoperator import chain
 from pendulum import datetime
+import time
 
 
 @dag(
@@ -19,6 +20,10 @@ from pendulum import datetime
     tags=["webinar"],
 )
 def downstream_astronauts():
+    @task
+    def sleep():
+        time.sleep(10)
+
     print_num_astronauts = BashOperator(
         task_id="print_num_astronauts",
         bash_command="echo $NUM_ASTRONAUTS",
@@ -37,8 +42,8 @@ def downstream_astronauts():
         bash_command="echo This is awesome!",
     )
 
-    chain(print_num_astronauts, print_reaction)
-    # print_num_astronauts >> print_reaction
+    chain(sleep(), print_num_astronauts, print_reaction)
+    # sleep() >> print_num_astronauts >> print_reaction
 
 
 downstream_astronauts()

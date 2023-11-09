@@ -21,7 +21,7 @@ def in_cat_fact():
 
     print_cat_fact = BashOperator(
         task_id="print_cat_fact",
-        bash_command=f"echo {get_cat_fact_obj}",
+        bash_command=f"echo '{get_cat_fact_obj}'",
     )
 
     chain(get_cat_fact_obj, print_cat_fact)

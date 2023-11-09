@@ -43,6 +43,7 @@ def etl_example_simple():
         task_id="query_cat_fact",
         postgres_conn_id="postgres_default",
         sql="SELECT * FROM cat_fact;",
+        show_return_value_in_logs=True,
     )
 
     # dependencies involving traditional operators need to be explicitly defined
